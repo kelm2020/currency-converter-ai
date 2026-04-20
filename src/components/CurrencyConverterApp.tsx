@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useCurrencyConverter } from '@/hooks/useCurrencyConverter';
+import { useCurrencyConverter } from '../hooks/useCurrencyConverter';
 import { motion } from 'motion/react';
 import AnimatedCard from './AnimatedCard';
 import ConverterForm from './ConverterForm';

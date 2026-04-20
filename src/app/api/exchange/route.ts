@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { currencyService } from '@/services/currencyService';
-import { withErrorHandler } from '@/lib/api-handler';
-import { ExchangeQuerySchema } from '@/infrastructure/contracts/exchange-api';
+import { currencyService } from '../../../services/currencyService';
+import { withErrorHandler } from '../../../lib/api-handler';
+import { ExchangeQuerySchema } from '../../../infrastructure/contracts/exchange-api';
 
 /**
  * BFF Route Handler for Exchange Rates

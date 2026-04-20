@@ -1,8 +1,8 @@
-import { createGetExchangeSnapshot } from '@/domain/use-cases/get-exchange-snapshot';
-import type { LoggerPort } from '@/domain/ports/logger-port';
-import { logger } from '@/infrastructure/adapters/console-logger';
-import { VatComplyExchangeRatesProvider } from '@/infrastructure/adapters/vatcomply-exchange-rates-provider';
-import { ZodSchemaValidator } from '@/infrastructure/adapters/zod-schema-validator';
+import { createGetExchangeSnapshot } from '../../domain/use-cases/get-exchange-snapshot';
+import type { LoggerPort } from '../../domain/ports/logger-port';
+import { logger } from '../adapters/console-logger';
+import { VatComplyExchangeRatesProvider } from '../adapters/vatcomply-exchange-rates-provider';
+import { ZodSchemaValidator } from '../adapters/zod-schema-validator';
 
 export function createExchangeContainer(
   fetcher: typeof fetch = fetch,

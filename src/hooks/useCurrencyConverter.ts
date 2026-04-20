@@ -2,15 +2,15 @@
 
 import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getExchangeRatesAction } from '@/app/actions/exchange-actions';
-import type { CurrencyRate } from '@/domain/entities/exchange-snapshot';
-import { convertCurrency } from '@/domain/use-cases/convert-currency';
+import { getExchangeRatesAction } from '../app/actions/exchange-actions';
+import type { CurrencyRate } from '../domain/entities/exchange-snapshot';
+import { convertCurrency } from '../domain/use-cases/convert-currency';
 import {
   type ExchangeRate,
   type ExchangeResponse,
-} from '@/infrastructure/contracts/exchange-api';
-import { getExchangeQueryKey } from '@/lib/exchange-query';
-import type { MarketStatus } from '@/lib/market-status';
+} from '../infrastructure/contracts/exchange-api';
+import { getExchangeQueryKey } from '../lib/exchange-query';
+import type { MarketStatus } from '../lib/market-status';
 
 interface UseCurrencyConverterResult {
   amount: number;

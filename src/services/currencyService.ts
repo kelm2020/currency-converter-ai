@@ -1,9 +1,9 @@
-import { createExchangeContainer } from '@/infrastructure/composition/exchange-container';
+import { createExchangeContainer } from '../infrastructure/composition/exchange-container';
 import {
   ExchangeResponseSchema,
   type ExchangeResponse,
-} from '@/infrastructure/contracts/exchange-api';
-import { nullLogger } from '@/infrastructure/adapters/null-logger';
+} from '../infrastructure/contracts/exchange-api';
+import { nullLogger } from '../infrastructure/adapters/null-logger';
 
 /**
  * Application-facing service kept as a stable facade for route handlers and tests.

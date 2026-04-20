@@ -1,11 +1,11 @@
 'use server';
 
-import { currencyService } from '@/services/currencyService';
+import { currencyService } from '../../services/currencyService';
 import { 
   ExchangeResponseSchema, 
   ExchangeQuerySchema,
   type ExchangeResponse 
-} from '@/infrastructure/contracts/exchange-api';
+} from '../../infrastructure/contracts/exchange-api';
 
 /**
  * Server Action to fetch exchange rates.

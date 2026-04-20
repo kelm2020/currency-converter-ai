@@ -1,7 +1,7 @@
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-import CurrencyConverterApp from '@/components/CurrencyConverterApp';
-import { getExchangeQueryKey } from '@/lib/exchange-query';
-import { currencyService } from '@/services/currencyService';
+import CurrencyConverterApp from '../components/CurrencyConverterApp';
+import { getExchangeQueryKey } from '../lib/exchange-query';
+import { currencyService } from '../services/currencyService';
 
 /**
  * Main Entry Point
