@@ -1,7 +1,7 @@
 import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import CurrencyConverterApp from '@/components/CurrencyConverterApp';
+import CurrencyConverterApp from './CurrencyConverterApp';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { describe, it, expect, beforeAll, afterEach, afterAll } from 'vitest';
 import React from 'react';

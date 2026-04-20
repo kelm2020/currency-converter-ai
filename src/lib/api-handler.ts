@@ -1,12 +1,12 @@
 import { ZodError } from 'zod';
 import { NextResponse } from 'next/server';
-import type { LoggerPort } from '@/domain/ports/logger-port';
-import { logger } from '@/infrastructure/adapters/console-logger';
+import type { LoggerPort } from '../domain/ports/logger-port';
+import { logger } from '../infrastructure/adapters/console-logger';
 import {
   AppError,
   UnexpectedApplicationError,
   ValidationError,
-} from '@/lib/exceptions';
+} from './exceptions';
 
 /**
  * Higher-order function to standardize Route Handler error handling using RFC 7807.

@@ -4,7 +4,7 @@ import React from 'react';
 import { Info, AlertTriangle } from 'lucide-react';
 import { formatCurrency } from '../utils/currencyUtils';
 import { motion, AnimatePresence } from 'motion/react';
-import type { MarketStatus } from '@/lib/market-status';
+import type { MarketStatus } from '../lib/market-status';
 
 interface ConversionResultProps {
   amount: number;

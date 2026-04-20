@@ -1,4 +1,4 @@
-import type { ExchangeSnapshot } from '@/domain/entities/exchange-snapshot';
+import type { ExchangeSnapshot } from '../entities/exchange-snapshot';
 
 export interface ExchangeRatesProviderPort {
   getExchangeSnapshot(baseCurrency: string): Promise<ExchangeSnapshot>;

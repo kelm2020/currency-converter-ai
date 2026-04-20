@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from 'vitest';
 import { currencyService } from './currencyService';
-import { ExternalApiError } from '@/lib/exceptions';
+import { ExternalApiError } from '../lib/exceptions';
 
 let mockFetch: MockInstance;
 

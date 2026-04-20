@@ -1,4 +1,4 @@
-import type { LogContext, LoggerPort } from '@/domain/ports/logger-port';
+import type { LogContext, LoggerPort } from '../../domain/ports/logger-port';
 
 class NullLoggerAdapter implements LoggerPort {
   debug(_message: string, _context?: LogContext): void {}

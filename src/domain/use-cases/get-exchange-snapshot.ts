@@ -1,6 +1,6 @@
-import type { ExchangeSnapshot } from '@/domain/entities/exchange-snapshot';
-import type { ExchangeRatesProviderPort } from '@/domain/ports/exchange-rates-provider';
-import type { LoggerPort } from '@/domain/ports/logger-port';
+import type { ExchangeSnapshot } from '../entities/exchange-snapshot';
+import type { ExchangeRatesProviderPort } from '../ports/exchange-rates-provider';
+import type { LoggerPort } from '../ports/logger-port';
 
 interface GetExchangeSnapshotDependencies {
   exchangeRatesProvider: ExchangeRatesProviderPort;

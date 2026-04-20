@@ -1,4 +1,4 @@
-import type { LogContext, LoggerPort } from '@/domain/ports/logger-port';
+import type { LogContext, LoggerPort } from '../../domain/ports/logger-port';
 
 type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 

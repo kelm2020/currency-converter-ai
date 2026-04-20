@@ -1,13 +1,13 @@
-import type { ExchangeSnapshot } from '@/domain/entities/exchange-snapshot';
-import type { ExchangeRatesProviderPort } from '@/domain/ports/exchange-rates-provider';
-import { ExternalDependencyError } from '@/shared/errors/application-error';
+import type { ExchangeSnapshot } from '../../domain/entities/exchange-snapshot';
+import type { ExchangeRatesProviderPort } from '../../domain/ports/exchange-rates-provider';
+import { ExternalDependencyError } from '../../shared/errors/application-error';
 import {
   ExternalCurrenciesSchema,
   ExternalRatesSchema,
   type ExternalCurrencies,
   type ExternalRates,
-} from '@/infrastructure/contracts/vatcomply';
-import { ZodSchemaValidator } from '@/infrastructure/adapters/zod-schema-validator';
+} from '../contracts/vatcomply';
+import { ZodSchemaValidator } from './zod-schema-validator';
 
 interface VatComplyExchangeRatesProviderDependencies {
   fetcher: typeof fetch;

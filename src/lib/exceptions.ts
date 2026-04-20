@@ -6,4 +6,4 @@ export {
   UnexpectedApplicationError,
   type ErrorSeverity,
   type ProblemDetails,
-} from '@/shared/errors/application-error';
+} from '../shared/errors/application-error';

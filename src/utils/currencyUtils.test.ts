@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { convertCurrency } from '@/domain/use-cases/convert-currency';
+import { convertCurrency } from '../domain/use-cases/convert-currency';
 import { formatCurrency } from './currencyUtils';
 
 describe('Currency Logic Utilities', () => {

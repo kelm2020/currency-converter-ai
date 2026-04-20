@@ -13,7 +13,7 @@ vi.mock('@tanstack/react-query', async () => {
   };
 });
 
-vi.mock('@/services/currencyService', () => ({
+vi.mock('../services/currencyService', () => ({
   currencyService: {
     getExchangeRatesBestEffort: vi.fn().mockResolvedValue({
       base: 'USD',
@@ -27,7 +27,7 @@ vi.mock('@/services/currencyService', () => ({
 }));
 
 // Mock the main app component to isolate the page smoke test
-vi.mock('@/components/CurrencyConverterApp', () => ({
+vi.mock('../components/CurrencyConverterApp', () => ({
   default: () => <div data-testid="main-app">Main App</div>,
 }));
 

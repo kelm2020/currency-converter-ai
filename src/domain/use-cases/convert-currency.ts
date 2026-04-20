@@ -1,4 +1,4 @@
-import type { CurrencyRate } from '@/domain/entities/exchange-snapshot';
+import type { CurrencyRate } from '../entities/exchange-snapshot';
 
 export interface ConvertCurrencyInput {
   amount: number;
