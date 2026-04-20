@@ -1,1 +1,1 @@
-export { logger } from '../infrastructure/adapters/console-logger';
+export { logger } from '@/infrastructure/adapters/console-logger';

@@ -6,3 +6,15 @@ coverage/
 *.log
 .env*
 !.env.example
+.next/
+next-env.d.ts
+
+# Playwright
+playwright-report/
+test-results/
+blob-report/
+
+# Storybook
+storybook-static/
+.storybook-cache/
+node_modules/.cache/storybook/

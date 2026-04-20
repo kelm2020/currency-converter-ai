@@ -2,31 +2,31 @@
 
 import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getExchangeRatesAction } from '@/app/actions/exchange-actions';
 import type { CurrencyRate } from '@/domain/entities/exchange-snapshot';
 import { convertCurrency } from '@/domain/use-cases/convert-currency';
 import {
+  ExchangeResponseSchema,
+  ProblemDetailsSchema,
   type ExchangeRate,
   type ExchangeResponse,
 } from '@/infrastructure/contracts/exchange-api';
+import { ZodSchemaValidator } from '@/infrastructure/adapters/zod-schema-validator';
 import { getExchangeQueryKey } from '@/lib/exchange-query';
 import type { MarketStatus } from '@/lib/market-status';
 
-interface UseCurrencyConverterResult {
-  amount: number;
-  setAmount: (value: number) => void;
-  from: string;
-  setFrom: (value: string) => void;
-  to: string;
-  setTo: (value: string) => void;
-  result: number;
-  exchangeRate: number;
-  inverseRate: number;
-  currencies: ExchangeRate[];
-  marketStatus: MarketStatus;
-  handleSwap: () => void;
-  lastUpdated?: string;
-  baseCurrency?: string;
+const schemaValidator = new ZodSchemaValidator();
+const exchangeResponseParser = ExchangeResponseSchema as {
+  parse(input: unknown): ExchangeResponse;
+};
+
+function getErrorMessage(payload: unknown): string {
+  const parsedError = ProblemDetailsSchema.safeParse(payload);
+
+  if (parsedError.success) {
+    return parsedError.data.detail;
+  }
+
+  return 'Market connection lost';
 }
 
 interface UseCurrencyConverterResult {
@@ -57,7 +57,16 @@ export function useCurrencyConverter(): UseCurrencyConverterResult {
 
   const { data, status, error } = useQuery<ExchangeResponse>({
     queryKey: getExchangeQueryKey(from),
-    queryFn: () => getExchangeRatesAction(from),
+    queryFn: async () => {
+      const res = await fetch(`/api/exchange?base=${from}`);
+      const payload: unknown = await res.json();
+
+      if (!res.ok) {
+        throw new Error(getErrorMessage(payload));
+      }
+
+      return schemaValidator.parse<ExchangeResponse>(exchangeResponseParser, payload);
+    },
     staleTime: 1000 * 60 * 5,
   });
 

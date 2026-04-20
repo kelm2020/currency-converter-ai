@@ -62,22 +62,6 @@ Fachadas estables para el resto del repo.
   - expone `getExchangeRates(base)`
   - delega al composition root y devuelve el contrato HTTP normalizado
 
-### `src/app/actions/`
-
-Server-side functions for orchestration and data fetching.
-
-- `exchange-actions.ts`
-  - `getExchangeRatesAction(base)`
-  - valida input y delega a `currencyService`
-
-### `src/app/actions/`
-
-Server-side functions for orchestration and data fetching.
-
-- `exchange-actions.ts`
-  - `getExchangeRatesAction(base)`
-  - valida input y delega a `currencyService`
-
 ### `src/app/api/`
 
 Delivery layer Next.js.
@@ -144,8 +128,8 @@ Cliente React.
 
 1. `src/app/page.tsx` obtiene en servidor el snapshot inicial de `USD`.
 2. Ese snapshot se hidrata al cliente con React Query para evitar un arranque completamente client-driven.
-3. `useCurrencyConverter` reutiliza ese dato inicial y llama a `getExchangeRatesAction(from)` (Server Action) cuando cambia la moneda base.
-4. La Server Action valida la moneda base, llama al servicio y devuelve el objeto tipado.
+3. `useCurrencyConverter` reutiliza ese dato inicial y dispara `fetch('/api/exchange?base=...')` cuando cambia la moneda base.
+4. El route handler parsea la query con `ExchangeQuerySchema`.
 5. `currencyService` crea el container de dependencias.
 6. `createGetExchangeSnapshot` invoca el puerto `ExchangeRatesProviderPort`.
 7. `VatComplyExchangeRatesProvider` consulta endpoints de VatComply.
@@ -220,10 +204,6 @@ Los tests actuales cubren:
   - exports: VatComplyExchangeRatesProvider
 - `src/infrastructure/adapters/zod-schema-validator.ts`
   - exports: ZodSchemaValidator
-
-## Server Actions
-
-- `src/app/actions/exchange-actions.ts`
 
 ## Delivery Endpoints
 

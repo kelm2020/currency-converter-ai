@@ -33,10 +33,6 @@
 - `src/infrastructure/adapters/zod-schema-validator.ts`
   - exports: ZodSchemaValidator
 
-## Server Actions
-
-- `src/app/actions/exchange-actions.ts`
-
 ## Delivery Endpoints
 
 - `src/app/api/exchange/route.ts`
