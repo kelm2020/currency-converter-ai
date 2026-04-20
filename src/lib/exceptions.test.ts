@@ -37,7 +37,7 @@ describe('Exceptions', () => {
     });
 
     it('RateLimitError should have status 429', () => {
-      const error = new RateLimitError('Wait');
+      const error = new RateLimitError();
       expect(error.status).toBe(429);
       expect(error.message).toContain('Too many requests');
     });

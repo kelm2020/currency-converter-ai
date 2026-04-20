@@ -10,7 +10,7 @@ export default defineConfig({
   ],
   // Force JSX transformation for Vitest, regardless of tsconfig.json
   esbuild: {
-    jsx: 'react-jsx',
+    jsx: 'automatic',
   },
   test: {
     environment: 'jsdom',

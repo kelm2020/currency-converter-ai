@@ -65,7 +65,7 @@ describe('Currency Logic Utilities', () => {
       const intlWithMutableNumberFormat = Intl as typeof Intl & {
         NumberFormat: typeof Intl.NumberFormat;
       };
-      intlWithMutableNumberFormat.NumberFormat = failingNumberFormat;
+      intlWithMutableNumberFormat.NumberFormat = failingNumberFormat as unknown as typeof Intl.NumberFormat;
 
       const result = formatCurrency(1.123456, 'USD');
       expect(result).toBe('1.123456');

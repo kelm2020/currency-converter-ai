@@ -28,8 +28,22 @@ export default function CurrencyConverterApp() {
     lastUpdated,
   } = useCurrencyConverter();
 
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const fromCurrencyData = currencies.find((c) => c.code === from);
   const toCurrencyData = currencies.find((c) => c.code === to);
+
+  const formattedDate = React.useMemo(() => {
+    if (!lastUpdated) return 'recently';
+    return new Date(lastUpdated).toLocaleString('en-US', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    }) + ' UTC';
+  }, [lastUpdated]);
 
   return (
     <div className="min-h-screen bg-[#f0f2f5] font-sans text-[#2e3333]">
@@ -76,12 +90,7 @@ export default function CurrencyConverterApp() {
           <div className="mt-10 pt-4 border-t border-gray-50 flex justify-end">
             <p className="text-[11px] text-gray-400 font-medium italic underline decoration-gray-200">
               {fromCurrencyData?.name} to {toCurrencyData?.name} conversion — Last updated{' '}
-              {lastUpdated
-                ? new Date(lastUpdated).toLocaleString('en-US', {
-                    dateStyle: 'medium',
-                    timeStyle: 'short',
-                  }) + ' UTC'
-                : 'recently'}
+              {mounted ? formattedDate : '...'}
             </p>
           </div>
         </AnimatedCard>
