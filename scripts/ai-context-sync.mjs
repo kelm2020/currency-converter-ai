@@ -62,6 +62,7 @@ async function generateSnapshot() {
     buildSection('Domain Inventory', 'src/domain'),
     buildSection('Infrastructure Contracts', 'src/infrastructure/contracts'),
     buildSection('Infrastructure Adapters', 'src/infrastructure/adapters'),
+    buildSection('Server Actions', 'src/app/actions'),
     buildSection('Delivery Endpoints', 'src/app/api'),
   ]);
 

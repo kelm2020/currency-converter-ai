@@ -1,6 +1,6 @@
 {
-  "name": "Professional Currency Converter",
-  "description": "A high-performance currency conversion application built for a technical challenge.",
+  "name": "Currency Converter AI-First",
+  "description": "A currency converter application following an AI-First roadmap with hexagonal architecture and BFF layer.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }
