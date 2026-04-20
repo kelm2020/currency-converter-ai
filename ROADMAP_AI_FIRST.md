@@ -16,6 +16,10 @@ Esta branch deja cerrada una primera etapa ejecutable del roadmap.
 - hidratación server-first inicial para exchange rates agregada en `src/app/page.tsx`
 - simplificación del estado cliente hacia `marketStatus`
 - persistencia de React Query migrada a `PersistQueryClientProvider`
+- resolución de error `--host` en Next.js via wrapper `scripts/dev.mjs`
+- corrección de errores de tipo en CI (`RateLimitError`, `Intl.NumberFormat` mock)
+- mitigación de warnings de hidratación en `layout.tsx` y `CurrencyConverterApp.tsx`
+- sincronización exitosa de `AI_CONTEXT.md` con el estado actual del código
 
 ### Diferido al siguiente ciclo
 
