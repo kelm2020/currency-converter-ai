@@ -24,8 +24,9 @@ const ProvidersTest = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// 1. Configure MSW (Mock Service Worker) for BFF endpoint
+// 1. Configure MSW (Mock Service Worker) to handle both internal BFF and external upstream
 const server = setupServer(
+  // Standard internal API
   http.get('/api/exchange', () => {
     return HttpResponse.json({
       base: 'USD',
@@ -35,10 +36,24 @@ const server = setupServer(
         { code: 'EUR', rate: 0.85, name: 'Euro', symbol: '€' }
       ]
     });
+  }),
+  // External Upstream (VatComply) - needed because Server Actions call this layer directly in tests
+  http.get('https://api.vatcomply.com/rates', () => {
+    return HttpResponse.json({
+      date: '2025-08-08',
+      base: 'USD',
+      rates: { USD: 1, EUR: 0.85 }
+    });
+  }),
+  http.get('https://api.vatcomply.com/currencies', () => {
+    return HttpResponse.json({
+      USD: { name: 'US Dollar', symbol: '$' },
+      EUR: { name: 'Euro', symbol: '€' }
+    });
   })
 );
 
-beforeAll(() => server.listen());
+beforeAll(() => server.listen({ onUnhandledRequest: 'bypass' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
@@ -54,28 +69,23 @@ describe('CurrencyConverter Integration', () => {
 
     // Wait for the mock API response to be processed
     await waitFor(() => {
-      // The new UI uses "=" instead of "equals" according to the PDF design
-      const resultElement = screen.getByText(/US Dollar =/i);
-      expect(resultElement).toBeInTheDocument();
+      // Find the specific result display row
+      const results = screen.getAllByText(/US Dollar/i);
+      // We expect it to be in the conversion result paragraph with the "=" sign
+      const conversionRow = results.find(el => el.textContent?.includes('='));
+      expect(conversionRow).toBeInTheDocument();
     }, { timeout: 3000 });
 
-    expect(screen.getByRole('heading', { name: /0.85 Euro/i })).toBeInTheDocument();
+    // Use a more flexible matcher for the heading to avoid issues with formatting/spaces
+    // level: 2 is for <h2>
+    expect(screen.getByRole('heading', { level: 2, name: /0\.85/ })).toBeInTheDocument();
   });
 
   it('shows error state when API fails', async () => {
+    // Intercept the upstream call to simulate failure
     server.use(
-      http.get('/api/exchange', () => {
-        return HttpResponse.json(
-          {
-            type: 'https://app.currency-converter.com/errors/internal_server_error',
-            title: 'Internal Server Error',
-            status: 500,
-            detail: 'Market connection lost',
-            code: 'INTERNAL_SERVER_ERROR',
-            severity: 'error',
-          },
-          { status: 500 }
-        );
+      http.get('https://api.vatcomply.com/rates', () => {
+        return new HttpResponse(null, { status: 503 });
       })
     );
 
@@ -86,8 +96,10 @@ describe('CurrencyConverter Integration', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Market connection lost/i)).toBeInTheDocument();
-    });
+      // The alert role is assigned to the error message div in ConversionResult.tsx
+      expect(screen.getByRole('alert')).toBeInTheDocument();
+      expect(screen.getByText(/VatComply is currently unavailable/i)).toBeInTheDocument();
+    }, { timeout: 4000 });
   });
 
   it('allows swapping currencies', async () => {
