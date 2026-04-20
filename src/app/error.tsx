@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { logger } from '@/lib/logger';
+import { logger } from '../lib/logger';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 import { motion } from 'motion/react';
 
